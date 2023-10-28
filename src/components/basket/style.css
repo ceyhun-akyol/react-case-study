@@ -1,0 +1,29 @@
+.basket {
+  display: flex;
+  position: fixed;
+  width: 400px;
+  min-height: 100px;
+  right: 0;
+  bottom: 0;
+  background-color: #fff;
+  border: solid 1px;
+  border-top-left-radius: 12px;
+}
+
+.basket ul {
+  width: 100%;
+  list-style-type: none;
+  margin: 20px;
+  padding: 0;
+}
+
+.basket ul li {
+  border-bottom: 1px solid;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  width: 100%;
+}
+
+.basket ul .total {
+  border-bottom: none;
+}

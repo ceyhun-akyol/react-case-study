@@ -1,28 +1,23 @@
 import React from "react";
 import { useBet } from "../../context/bet";
+import TableHeader from "../../components/tableHeader";
+import BetRow from "../../components/betRow";
+
 import "./style.css";
 
 function BetListPage() {
   const { betList, refreshBetList } = useBet();
 
-  React.useEffect(() => {
-    console.log("betList: ", betList);
-  }, [betList]);
   return (
     <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <table border="1" cellpadding="1" cellspacing="0">
+        <TableHeader count={200} />
+        <tbody>
+          {betList.map((bet) => (
+            <BetRow {...bet} />
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 }

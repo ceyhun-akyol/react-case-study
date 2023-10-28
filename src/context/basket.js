@@ -2,8 +2,14 @@ import React, { createContext, useState, useEffect, useContext } from "react";
 
 const BasketContext = createContext();
 
+const dummyBasket = [
+  { mbs: 4, code: 1234, name: "gs-fb", o: 7.2 },
+  { mbs: 4, code: 1234, name: "gs-fb", o: 7.2 },
+  { mbs: 4, code: 1234, name: "gs-fb", o: 7.2 },
+];
+
 export const BasketProvider = ({ children }) => {
-  const [basketList, setBasketList] = useState([]);
+  const [basketList, setBasketList] = useState(dummyBasket);
 
   useEffect(() => {}, []);
 

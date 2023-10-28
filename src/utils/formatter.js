@@ -1,7 +1,7 @@
 class Formatter {
   bet(item) {
     return {
-      year: item.C,
+      code: item.C,
       name: item.N,
       type: item.TYPE,
       id: item.NID,

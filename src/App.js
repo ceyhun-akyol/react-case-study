@@ -1,13 +1,17 @@
 import BetListPage from "./pages/BetListPage";
-import "./App.css";
+import Basket from "./components/basket";
+
 import { BasketProvider } from "./context/basket";
 import { BetProvider } from "./context/bet";
+
+import "./App.css";
 
 function App() {
   return (
     <BasketProvider>
       <BetProvider>
         <BetListPage />
+        <Basket />
       </BetProvider>
     </BasketProvider>
   );
