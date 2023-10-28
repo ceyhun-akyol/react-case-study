@@ -2,24 +2,25 @@ import React, { createContext, useState, useEffect, useContext } from "react";
 
 const BasketContext = createContext();
 
-const dummyBasket = [
-  { mbs: 4, code: 1234, name: "gs-fb", o: 7.2 },
-  { mbs: 4, code: 1234, name: "gs-fb", o: 7.2 },
-  { mbs: 4, code: 1234, name: "gs-fb", o: 7.2 },
-];
-
 export const BasketProvider = ({ children }) => {
-  const [basketList, setBasketList] = useState(dummyBasket);
+  const [basketList, setBasketList] = useState([]);
 
   useEffect(() => {}, []);
 
   function addBasket(basket) {
-    const id = `${new Date().getTime()}`;
-    setBasketList([...basketList, { id, ...basket }]);
+    const sameBet = basketList.find((item) => basket.code === item.code);
+    if (sameBet) {
+      setBasketList([
+        ...basketList.filter((b) => b.code !== basket.code),
+        { ...basket },
+      ]);
+    } else {
+      setBasketList([...basketList, { ...basket }]);
+    }
   }
 
   function removeBasket(id) {
-    setBasketList([...basketList.filter.filter((b) => b.id !== id)]);
+    setBasketList([...basketList.filter((b) => b.id !== id)]);
   }
 
   return (

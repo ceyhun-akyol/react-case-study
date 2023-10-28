@@ -1,4 +1,5 @@
 import React from "react";
+import { useBasket } from "../context/basket";
 
 const getO = (ocg, p1, p2, p3, p4) => {
   try {
@@ -8,8 +9,34 @@ const getO = (ocg, p1, p2, p3, p4) => {
   }
 };
 
-const TableHeader = (props) => {
+const BetRow = (props) => {
   const { name, date, day, league, code, time, ocg } = props;
+  const { basketList, addBasket, removeBasket } = useBasket();
+
+  const renderClickableTd = (p1, p2, p3, p4) => {
+    const id = [code, p1, p2, p3, p4].join("-");
+
+    const selected =
+      basketList.findIndex((a) => a.id === id) !== -1 ? "selected" : "";
+
+    const click = () =>
+      selected
+        ? removeBasket(id)
+        : addBasket({
+            id: [code, p1, p2, p3, p4].join("-"),
+            mbs: ocg["1"].MBS,
+            code: code,
+            name: name,
+            o: getO(ocg, p1, p2, p3, p4),
+          });
+
+    return (
+      <td onClick={click} className={`clickable ${selected}`}>
+        {getO(ocg, p1, p2, p3, p4)}
+      </td>
+    );
+  };
+
   return (
     <>
       <tr>
@@ -38,19 +65,19 @@ const TableHeader = (props) => {
         <td>{`${code} ${time} ${name}`}</td>
         <td>Yorumlar</td>
         <td>{ocg["1"].MBS}</td>
-        <td>{getO(ocg, "1", "OC", "0", "O")}</td>
-        <td>{getO(ocg, "1", "OC", "1", "O")}</td>
-        <td>{getO(ocg, "1", "OC", "2", "O")}</td>
-        <td>{getO(ocg, "5", "OC", "25", "O")}</td>
-        <td>{getO(ocg, "5", "OC", "26", "O")}</td>
+        {renderClickableTd("1", "OC", "0", "O")}
+        {renderClickableTd("1", "OC", "1", "O")}
+        {renderClickableTd("1", "OC", "2", "O")}
+        {renderClickableTd("5", "OC", "25", "O")}
+        {renderClickableTd("5", "OC", "26", "O")}
         <td>&nbsp;</td>
         <td>&nbsp;</td>
         <td>&nbsp;</td>
         <td>&nbsp;</td>
         <td>&nbsp;</td>
-        <td>{getO(ocg, "2", "OC", "3", "O")}</td>
-        <td>{getO(ocg, "2", "OC", "4", "O")}</td>
-        <td>{getO(ocg, "2", "OC", "5", "O")}</td>
+        {renderClickableTd("2", "OC", "3", "O")}
+        {renderClickableTd("2", "OC", "4", "O")}
+        {renderClickableTd("2", "OC", "5", "O")}
         <td>&nbsp;</td>
         <td>&nbsp;</td>
         <td>&nbsp;</td>
@@ -59,4 +86,4 @@ const TableHeader = (props) => {
   );
 };
 
-export default TableHeader;
+export default BetRow;

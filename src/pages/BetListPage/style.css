@@ -27,3 +27,11 @@
   width: calc((100vw - 200px) / 18);
   font-size: 11px;
 }
+
+.App table tbody tr .selected {
+  background-color: yellow;
+}
+
+.App table tbody tr .clickable {
+  cursor: pointer;
+}
